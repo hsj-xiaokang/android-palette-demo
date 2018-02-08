@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int MSG_SAVE_SUCCESS = 1;
     private static final int MSG_SAVE_FAILED = 2;
     private Handler mHandler;
+    private Button b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +49,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPenView.setSelected(true);
         mEraserView = findViewById(R.id.eraser);
         mClearView = findViewById(R.id.clear);
+        b = (Button)findViewById(R.id.B);
 
         mUndoView.setOnClickListener(this);
         mRedoView.setOnClickListener(this);
         mPenView.setOnClickListener(this);
         mEraserView.setOnClickListener(this);
         mClearView.setOnClickListener(this);
+        b.setOnClickListener(this);
 
         mUndoView.setEnabled(false);
         mRedoView.setEnabled(false);
@@ -185,6 +189,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.clear:
                 mPaletteView.clear();
+                break;
+            case R.id.B:
+                startActivity(new Intent(this, com.beyondsw.palette.zhy.MainActivity.class));
                 break;
         }
     }

@@ -2,12 +2,15 @@ package com.beyondsw.palette;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Shader;
 import android.graphics.Xfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -27,6 +30,7 @@ public class PaletteView extends View {
     private float mLastY;
     private Bitmap mBufferBitmap;
     private Canvas mBufferCanvas;
+    private Context context;
 
     private static final int MAX_CACHE_STEP = 20;
 
@@ -50,10 +54,12 @@ public class PaletteView extends View {
 
     public PaletteView(Context context) {
         this(context,null);
+        this.context = context;
     }
 
     public PaletteView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         setDrawingCacheEnabled(true);
         init();
     }
@@ -67,6 +73,8 @@ public class PaletteView extends View {
     }
 
     private void init() {
+       /* Shader shader = new BitmapShader(BitmapFactory.decodeResource(this.context.getResources(),R.mipmap.ic_launcher),
+                Shader.TileMode.REPEAT,Shader.TileMode.REPEAT);*/
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setFilterBitmap(true);
@@ -76,6 +84,7 @@ public class PaletteView extends View {
         mEraserSize = 40;
         mPaint.setStrokeWidth(mDrawSize);
         mPaint.setColor(0XFFffffff);
+//        mPaint.setShader(shader);
 
         mClearMode = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
     }
